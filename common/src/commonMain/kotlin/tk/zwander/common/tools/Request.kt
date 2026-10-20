@@ -546,7 +546,6 @@ object Request {
                 ) {
                     return FetchResult.GetBinaryFileResult(
                         info = generateInfo(),
-                        error = VersionMismatchException(Res.string.versionMismatch(fw, served)),
                         requestBody = request,
                         responseCode = status,
                     )
