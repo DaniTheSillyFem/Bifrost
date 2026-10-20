@@ -20,12 +20,12 @@ jobs:
       with:
         distribution: 'corretto'
         java-version: '21'
-    - name: Get Latest Release
-      id: release
-      uses: pozetroninc/github-action-get-latest-release@master
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        repository: ${{ github.repository }}
+#    - name: Get Latest Release
+#      id: release
+#      uses: pozetroninc/github-action-get-latest-release@master
+#      with:
+#        token: ${{ secrets.GITHUB_TOKEN }}
+#        repository: ${{ github.repository }}
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
 #    - name: Cache Gradle and Build
@@ -76,13 +76,4 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: Bifrost
-        path: ${{ github.workspace }}/android/build/outputs/apk/release/bifrost_android_${{ steps.release.outputs.release }}.apk
-    - name: Upload Release APK
-      uses: ncipollo/release-action@v1
-      with:
-        artifacts: ${{ github.workspace }}/android/build/outputs/apk/release/bifrost_android_${{ steps.release.outputs.release }}.apk
-        token: ${{ secrets.GITHUB_TOKEN }}
-        allowUpdates: true
-        replacesArtifacts: false
-        omitBodyDuringUpdate: true
-        tag: ${{ steps.release.outputs.release }}
+        path: ${{ github.workspace }}/android/build/outputs/apk/release/bifrost_android_custom.apk
