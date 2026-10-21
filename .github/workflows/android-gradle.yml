@@ -58,19 +58,19 @@ jobs:
         BUILD_TOOL_VERSION=$(ls /usr/local/lib/android/sdk/build-tools/ | tail -n 1)
         echo "BUILD_TOOL_VERSION=$BUILD_TOOL_VERSION" >> $GITHUB_ENV
         echo Last build tool version is: $BUILD_TOOL_VERSION
-    - name: Sign APK
-      id: sign_apk
-      uses: filippoLeporati93/android-release-signer@v1
-      with:
-        releaseDirectory: android/build/outputs/apk/release
-        signingKeyBase64: ${{ secrets.ANDROID_SIGNING_KEY }}
-        alias: ${{ secrets.ANDROID_SIGNING_KEY_ALIAS }}
-        keyStorePassword: ${{ secrets.ANDROID_SIGNING_KEY_PWD }}
-        keyPassword: ${{ secrets.ANDROID_SIGNING_KEY_PWD }}
-      env:
-        BUILD_TOOLS_VERSION: ${{ env.BUILD_TOOL_VERSION }}
+#    - name: Sign APK
+#      id: sign_apk
+#      uses: filippoLeporati93/android-release-signer@v1
+#      with:
+#        releaseDirectory: android/build/outputs/apk/release
+#        signingKeyBase64: ${{ secrets.ANDROID_SIGNING_KEY }}
+#        alias: ${{ secrets.ANDROID_SIGNING_KEY_ALIAS }}
+#        keyStorePassword: ${{ secrets.ANDROID_SIGNING_KEY_PWD }}
+#        keyPassword: ${{ secrets.ANDROID_SIGNING_KEY_PWD }}
+#      env:
+#        BUILD_TOOLS_VERSION: ${{ env.BUILD_TOOL_VERSION }}
     - name: Rename APK
-      run: mv ${{ steps.sign_apk.outputs.signedReleaseFile }} ${{ github.workspace }}/android/build/outputs/apk/release/bifrost_android_custom.apk
+      run: mv ${{ github.workspace }}/android/build/outputs/apk/release/bifrost_android_2.1.4-release-unsigned.apk ${{ github.workspace }}/android/build/outputs/apk/release/bifrost_android_custom.apk
     - name: Upload APK
       if: ${{ always() }}
       uses: actions/upload-artifact@v4
